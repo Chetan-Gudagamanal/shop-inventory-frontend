@@ -36,6 +36,9 @@ export default function HomePage({
   return (
     <>
       <Header />
+      {/* <p>
+        <span className={styles.fancy}>Shop Inventory</span>
+      </p> */}
       {shopData.length ? (
         <>
           <Container
@@ -48,10 +51,14 @@ export default function HomePage({
               gap: "1.5em",
               flexWrap: "wrap",
               padding: "1em",
-              height: "100vh",
+              height: "90vh",
             }}
           >
-            <Typography variant="h3">
+            <Typography
+              variant="h3"
+              className={styles.fancy}
+              sx={{ fontWeight: "bolder" }}
+            >
               {shopData[0].shopName.toUpperCase()}
             </Typography>
             <Typography>{shopData[0].description}</Typography>
@@ -65,12 +72,15 @@ export default function HomePage({
                 handleViewProducts();
               }}
             >
-              View Products
+              View / ADD Products
             </Button>
           </Container>
         </>
       ) : (
         <>
+          <p>
+            <span className={styles.fancy}>Shop Inventory</span>
+          </p>
           <BasicModal
             setShopData={setShopData}
             loggedInUserId={loggedInUserId}

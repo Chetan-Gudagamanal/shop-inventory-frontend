@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Container";
 import { backend_url } from "../../constants";
+import { Typography } from "@mui/material";
 
 export default function LoginPage({ setStatus, setLoggedInUserId }) {
   const navigate = useNavigate();
@@ -66,12 +67,13 @@ export default function LoginPage({ setStatus, setLoggedInUserId }) {
         alignContent: "center",
         alignItems: "center",
         paddingTop: "1em",
+        minHeight: "80vh",
       }}
     >
       <div>
         {/* <p>Click on create Account to register as new user</p> */}
 
-        <h2 style={{ margin: "0" }}>LOGIN</h2>
+        <h2 style={{ margin: "0", paddingBottom: "1em" }}>LOGIN TO CONTINUE</h2>
         <div>
           <Card>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.Form}>
@@ -110,6 +112,9 @@ export default function LoginPage({ setStatus, setLoggedInUserId }) {
               <br />
 
               <div className="text-center">
+                <Typography variant="caption">
+                  New To Shop Inventory?
+                </Typography>
                 <button
                   className={styles.secondaryFormbutton}
                   onClick={() => {

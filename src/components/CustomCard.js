@@ -8,8 +8,11 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import { backend_url } from "../constants";
 import { useNavigate } from "react-router-dom";
+import UpdateProductModal from "../pages/ProductsPage/UpdateProductModal";
+import { CustomContext } from "../App";
 
 export default function CustomCard(props) {
+  const { handleViewProducts } = React.useContext(CustomContext);
   const navigate = useNavigate();
   const handleDelete = async () => {
     const url = `${backend_url}/delete_product/${props.product["_id"]}`;
@@ -22,7 +25,7 @@ export default function CustomCard(props) {
     });
     if (rawData.status == 200) {
       let jsonData = await rawData.json().then((res) => {
-        navigate("/homepage");
+        handleViewProducts();
       });
     } else {
       let jsonData = await rawData.json();
@@ -54,9 +57,13 @@ export default function CustomCard(props) {
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
         }}
       >
+        <UpdateProductModal
+          productData={props.product}
+          handleViewProducts={props.handleViewProducts}
+        />
         <Button
           size="small"
           color="error"

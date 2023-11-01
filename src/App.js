@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import LoginPage from "./pages/UserLogin/LoginPage";
 import RegisterPage from "./pages/UserRegister/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 //     element: <App />,
 //   },
 // ]);
+export const CustomContext = React.createContext();
 
 function App() {
   const [status, setStatus] = useState("");
@@ -42,49 +43,51 @@ function App() {
     }
   };
   return (
-    <div className="App">
-      <section className="section-class">
-        <Routes>
-          <Route
-            path="/register"
-            element={<RegisterPage setStatus={setStatus} />}
-          />
-          <Route
-            path="/homepage"
-            element={
-              <HomePage
-                setStatus={setStatus}
-                loggedInUserId={loggedInUserId}
-                setProductsData={setProductsData}
-                shopData={shopData}
-                setShopData={setShopData}
-                handleViewProducts={handleViewProducts}
-              />
-            }
-          />
-          <Route
-            path="/products"
-            element={
-              <ProductsPage
-                setStatus={setStatus}
-                productsData={productsData}
-                shopData={shopData}
-                handleViewProducts={handleViewProducts}
-              />
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <LoginPage
-                setStatus={setStatus}
-                setLoggedInUserId={setLoggedInUserId}
-              />
-            }
-          />
-        </Routes>
-      </section>
-    </div>
+    <CustomContext.Provider value={{ handleViewProducts }}>
+      <div className="App">
+        <section className="section-class">
+          <Routes>
+            <Route
+              path="/register"
+              element={<RegisterPage setStatus={setStatus} />}
+            />
+            <Route
+              path="/homepage"
+              element={
+                <HomePage
+                  setStatus={setStatus}
+                  loggedInUserId={loggedInUserId}
+                  setProductsData={setProductsData}
+                  shopData={shopData}
+                  setShopData={setShopData}
+                  handleViewProducts={handleViewProducts}
+                />
+              }
+            />
+            <Route
+              path="/products"
+              element={
+                <ProductsPage
+                  setStatus={setStatus}
+                  productsData={productsData}
+                  shopData={shopData}
+                  handleViewProducts={handleViewProducts}
+                />
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <LoginPage
+                  setStatus={setStatus}
+                  setLoggedInUserId={setLoggedInUserId}
+                />
+              }
+            />
+          </Routes>
+        </section>
+      </div>
+    </CustomContext.Provider>
   );
 }
 

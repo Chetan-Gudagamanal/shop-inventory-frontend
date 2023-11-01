@@ -98,7 +98,12 @@ export default function BasicModal({
         paddingTop: "1em",
       }}
     >
-      <Button sx={{ margin: "10px" }} variant="contained" onClick={handleOpen}>
+      <Button
+        sx={{ margin: "10px" }}
+        variant="contained"
+        size="large"
+        onClick={handleOpen}
+      >
         Create Shop
       </Button>
       <Modal

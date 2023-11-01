@@ -70,11 +70,12 @@ export default function RegisterPage({ setStatus }) {
         justifyContent: "center",
         alignItems: "center",
         paddingTop: "1em",
+        minHeight: "80vh",
       }}
     >
       <div>
         {/* <p>Click on create Account to register as new user</p> */}
-        <h2 style={{ margin: "0" }}>REGISTER</h2>
+        <h2 style={{ margin: "0", paddingBottom: "1em" }}>REGISTER</h2>
         <div>
           <Card>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.Form}>

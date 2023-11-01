@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import styles from "./AddProductModal.module.css";
+import styles from "./UpdateProductModal.module.css";
+
+import { CustomContext } from "../../App";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,13 +29,7 @@ const style = {
   p: 4,
 };
 
-export default function AddProductModal({
-  setShopData,
-  loggedInUserId,
-  getShopData,
-  handleViewProducts,
-  shopData,
-}) {
+export default function UpdateProductModal({ productData }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,6 +44,8 @@ export default function AddProductModal({
     quantity: Yup.number().required(),
   });
 
+  const { handleViewProducts } = React.useContext(CustomContext);
+
   const {
     register,
     handleSubmit,
@@ -56,12 +54,12 @@ export default function AddProductModal({
 
   const onSubmit = (data) => {
     setLoadingStatus(true);
-    data["shopId"] = shopData[0]["_id"];
     console.log(data);
-    const addProduct = async () => {
-      const url = `${backend_url}/add_products`;
+    console.log(productData);
+    const updateProduct = async () => {
+      const url = `${backend_url}/update_product/${productData["_id"]}`;
       const rawData = await fetch(url, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "x-auth-token": localStorage.getItem("x-auth-token"),
           "Content-Type": "application/json",
@@ -72,8 +70,8 @@ export default function AddProductModal({
         let jsonData = await rawData.json().then((res) => {
           // setStatus("Login Successful")
           console.log(res);
-          handleViewProducts();
           handleClose();
+          handleViewProducts();
           //model('pls login to continue')
           // navigate("/");
         });
@@ -83,7 +81,7 @@ export default function AddProductModal({
         setLoadingStatus(false);
       }
     };
-    addProduct();
+    updateProduct();
     // navigate("/login")
     setLoadingStatus(false);
   };
@@ -98,12 +96,8 @@ export default function AddProductModal({
         paddingTop: "1em",
       }}
     >
-      <Button
-        sx={{ marginBottom: "25px" }}
-        variant="contained"
-        onClick={handleOpen}
-      >
-        Add New Product
+      <Button size="small" onClick={handleOpen}>
+        Update Product
       </Button>
       <Modal
         open={open}
@@ -171,7 +165,7 @@ export default function AddProductModal({
                   {!loadingStatus ? (
                     <input
                       type="submit"
-                      value="CREATE"
+                      value="UPDATE"
                       className={styles.input}
                     />
                   ) : (

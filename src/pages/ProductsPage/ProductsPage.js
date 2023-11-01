@@ -43,12 +43,16 @@ export default function ProductsPage({
               container
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
               {productsData.map((product, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <Item>
-                    <CustomCard product={product} />
-                  </Item>
+                <Grid item xs={12} sm={5} md={4} key={index}>
+                  {/* <Item> */}
+                  <CustomCard
+                    product={product}
+                    handleViewProducts={handleViewProducts}
+                  />
+                  {/* </Item> */}
                 </Grid>
               ))}
             </Grid>
