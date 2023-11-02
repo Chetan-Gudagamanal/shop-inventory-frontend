@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { backend_url } from "../../constants";
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import styles from "./HomePage.module.css";
 import { useNavigate } from "react-router-dom";
 import BasicModal from "../../components/BasicModal";
+import { CustomContext } from "../../App";
 
-export default function HomePage({
-  loggedInUserId,
-  setProductsData,
-  shopData,
-  setShopData,
-  handleViewProducts,
-}) {
+export default function HomePage() {
+  const {
+    setStatus,
+    loggedInUserId,
+    setProductsData,
+    shopData,
+    setShopData,
+    handleViewProducts,
+  } = React.useContext(CustomContext);
   const getShopData = async () => {
     const url = `${backend_url}/get_shop_details/${loggedInUserId}`;
     const rawData = await fetch(url, {
@@ -36,9 +39,6 @@ export default function HomePage({
   return (
     <>
       <Header />
-      {/* <p>
-        <span className={styles.fancy}>Shop Inventory</span>
-      </p> */}
       {shopData.length ? (
         <>
           <Container
@@ -57,13 +57,19 @@ export default function HomePage({
             <Typography
               variant="h3"
               className={styles.fancy}
-              sx={{ fontWeight: "bolder" }}
+              sx={{ fontWeight: "bolder", fontSize: "6vh" }}
             >
               {shopData[0].shopName.toUpperCase()}
             </Typography>
             <Typography>{shopData[0].description}</Typography>
-            <Typography>{shopData[0].address}</Typography>
-            <Typography>{`lat:${shopData[0].location.lat}   lng:${shopData[0].location.lng}`}</Typography>
+            <Box sx={{ backgroundColor: "rgba(10,10,10,0.2)" }}>
+              <Typography sx={{ fontSize: "0.5em" }}>
+                {shopData[0].address}
+              </Typography>
+              <Typography
+                sx={{ fontSize: "0.5em" }}
+              >{`lat:${shopData[0].location.lat}   lng:${shopData[0].location.lng}`}</Typography>
+            </Box>
             <Button
               sx={{ marginTop: "10px" }}
               variant="contained"
@@ -82,7 +88,6 @@ export default function HomePage({
             <span className={styles.fancy}>Shop Inventory</span>
           </p>
           <BasicModal
-            setShopData={setShopData}
             loggedInUserId={loggedInUserId}
             getShopData={getShopData}
           />

@@ -32,9 +32,14 @@ export default function CustomCard(props) {
     }
   };
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor: "#c1e3ff" }}>
+    <Card sx={{ maxWidth: 345, backgroundColor: "beige" }}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          sx={{ color: "teal" }}
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
           {props.product.productname}
         </Typography>
         <Typography variant="body2" color="text.secondary">

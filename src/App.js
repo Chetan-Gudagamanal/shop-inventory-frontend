@@ -8,12 +8,6 @@ import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import { backend_url } from "./constants";
 import { useNavigate } from "react-router-dom";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//   },
-// ]);
 export const CustomContext = React.createContext();
 
 function App() {
@@ -43,46 +37,26 @@ function App() {
     }
   };
   return (
-    <CustomContext.Provider value={{ handleViewProducts }}>
+    <CustomContext.Provider
+      value={{
+        handleViewProducts,
+        loggedInUserId,
+        setLoggedInUserId,
+        productsData,
+        setProductsData,
+        shopData,
+        setShopData,
+      }}
+    >
       <div className="App">
         <section className="section-class">
           <Routes>
-            <Route
-              path="/register"
-              element={<RegisterPage setStatus={setStatus} />}
-            />
-            <Route
-              path="/homepage"
-              element={
-                <HomePage
-                  setStatus={setStatus}
-                  loggedInUserId={loggedInUserId}
-                  setProductsData={setProductsData}
-                  shopData={shopData}
-                  setShopData={setShopData}
-                  handleViewProducts={handleViewProducts}
-                />
-              }
-            />
-            <Route
-              path="/products"
-              element={
-                <ProductsPage
-                  setStatus={setStatus}
-                  productsData={productsData}
-                  shopData={shopData}
-                  handleViewProducts={handleViewProducts}
-                />
-              }
-            />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/products" element={<ProductsPage />} />
             <Route
               path="/"
-              element={
-                <LoginPage
-                  setStatus={setStatus}
-                  setLoggedInUserId={setLoggedInUserId}
-                />
-              }
+              element={<LoginPage setLoggedInUserId={setLoggedInUserId} />}
             />
           </Routes>
         </section>

@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import Card from "@mui/material/Container";
 import { backend_url } from "../../constants";
 
-export default function RegisterPage({ setStatus }) {
+export default function RegisterPage() {
   const navigate = useNavigate();
   const [loadingStatus, setLoadingStatus] = useState(false);
   const phoneRegExp =

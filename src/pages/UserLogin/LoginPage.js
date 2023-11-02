@@ -10,7 +10,7 @@ import Card from "@mui/material/Container";
 import { backend_url } from "../../constants";
 import { Typography } from "@mui/material";
 
-export default function LoginPage({ setStatus, setLoggedInUserId }) {
+export default function LoginPage({ setLoggedInUserId }) {
   const navigate = useNavigate();
   const [loadingStatus, setLoadingStatus] = useState(false);
   const validationSchema = Yup.object().shape({

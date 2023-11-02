@@ -16,6 +16,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Container";
 import { backend_url } from "../../constants";
+import { IconButton } from "@mui/material";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 const style = {
   position: "absolute",
@@ -23,7 +25,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  // bgcolor: "background.paper",
+  bgcolor: "#d4def8",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -96,7 +99,13 @@ export default function UpdateProductModal({ productData }) {
         paddingTop: "1em",
       }}
     >
-      <Button size="small" onClick={handleOpen}>
+      <Button
+        size="small"
+        onClick={() => {
+          handleOpen();
+          console.log(productData);
+        }}
+      >
         Update Product
       </Button>
       <Modal
@@ -106,6 +115,17 @@ export default function UpdateProductModal({ productData }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              paddingRight: "1em",
+            }}
+          >
+            <IconButton color="error" onClick={handleClose}>
+              <CancelPresentationIcon />
+            </IconButton>
+          </Typography>
           <div>
             {/* <p>Click on create Account to register as new user</p> */}
             {/* <h2 style={{ margin: "0" }}>CREATE SHOP</h2> */}
@@ -116,6 +136,7 @@ export default function UpdateProductModal({ productData }) {
                   <input
                     {...register("productname")}
                     placeholder="Enter product Name"
+                    defaultValue={productData["productname"]}
                     className={styles.input}
                   />
                   {errors.productname && (
@@ -128,6 +149,7 @@ export default function UpdateProductModal({ productData }) {
                   <textarea
                     {...register("description")}
                     placeholder="Enter the description"
+                    defaultValue={productData["description"]}
                     className={styles.input}
                   />
                   {errors.description && (
@@ -140,6 +162,7 @@ export default function UpdateProductModal({ productData }) {
                   <input
                     {...register("quantity")}
                     placeholder="Enter product quantity"
+                    defaultValue={productData["quantity"]}
                     className={styles.input}
                   />
                   {errors.quantity && (
@@ -152,6 +175,7 @@ export default function UpdateProductModal({ productData }) {
                   <input
                     {...register("price")}
                     placeholder="Enter product priice"
+                    defaultValue={productData["price"]}
                     className={styles.input}
                   />
                   {errors.price && (

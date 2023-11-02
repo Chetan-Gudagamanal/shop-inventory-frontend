@@ -14,6 +14,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Container";
 import { backend_url } from "../constants";
+import { IconButton } from "@mui/material";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 const style = {
   position: "absolute",
@@ -27,11 +29,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({
-  setShopData,
-  loggedInUserId,
-  getShopData,
-}) {
+export default function BasicModal({ loggedInUserId, getShopData }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -113,6 +111,17 @@ export default function BasicModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              paddingRight: "1em",
+            }}
+          >
+            <IconButton color="error" onClick={handleClose}>
+              <CancelPresentationIcon />
+            </IconButton>
+          </Typography>
           <div>
             {/* <p>Click on create Account to register as new user</p> */}
             {/* <h2 style={{ margin: "0" }}>CREATE SHOP</h2> */}

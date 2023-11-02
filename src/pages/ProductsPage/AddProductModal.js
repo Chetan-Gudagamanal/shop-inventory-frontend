@@ -14,6 +14,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Container";
 import { backend_url } from "../../constants";
+import { IconButton } from "@mui/material";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 const style = {
   position: "absolute",
@@ -21,7 +23,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  // bgcolor: "background.paper",
+  bgcolor: "#d4def8",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -112,6 +115,17 @@ export default function AddProductModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              paddingRight: "1em",
+            }}
+          >
+            <IconButton color="error" onClick={handleClose}>
+              <CancelPresentationIcon />
+            </IconButton>
+          </Typography>
           <div>
             {/* <p>Click on create Account to register as new user</p> */}
             {/* <h2 style={{ margin: "0" }}>CREATE SHOP</h2> */}

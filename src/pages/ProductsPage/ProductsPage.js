@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Header from "../../components/Header";
 import AddProductModal from "./AddProductModal";
+import { CustomContext } from "../../App";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,18 +19,24 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProductsPage({
-  productsData,
-  shopData,
-  handleViewProducts,
-}) {
+export default function ProductsPage() {
+  const { productsData, shopData, handleViewProducts } =
+    React.useContext(CustomContext);
   console.log(productsData);
   return (
     <>
       <Header />
       <Container className={styles.pageContainer}>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="h4" sx={{ paddingTop: "1em" }} gutterBottom>
+          <Typography
+            variant="h4"
+            sx={{
+              paddingTop: "1em",
+              color: "teal",
+              fontWeight: "bolder",
+            }}
+            gutterBottom
+          >
             {shopData[0].shopName.toUpperCase()}
           </Typography>
 
