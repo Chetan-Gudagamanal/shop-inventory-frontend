@@ -13,14 +13,14 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const [loadingStatus, setLoadingStatus] = useState(false);
   const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
   const validationSchema = Yup.object().shape({
     userName: Yup.string().required(),
     phone: Yup.string()
       .required()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .min(10, "too short")
-      .max(10, "too long"),
+      .matches(phoneRegExp, "Phone number should be of Valid 10 digits")
+      .min(10, "Enter valid 10 digit phone number")
+      .max(10, "Enter valid 10 digit phone number"),
     userEmail: Yup.string().required().email(),
     password: Yup.string().required(),
   });

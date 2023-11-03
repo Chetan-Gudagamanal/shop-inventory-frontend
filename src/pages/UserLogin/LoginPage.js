@@ -13,9 +13,12 @@ import { Typography } from "@mui/material";
 export default function LoginPage({ setLoggedInUserId }) {
   const navigate = useNavigate();
   const [loadingStatus, setLoadingStatus] = useState(false);
+  const phoneOrEmailRegExp = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
   const validationSchema = Yup.object().shape({
-    userEmail: Yup.string().required().email(),
-    password: Yup.string().required(),
+    // userEmail: Yup.string().required().email(),
+    userEmail: Yup.string()
+      .required()
+      .matches(phoneOrEmailRegExp, "Email or Phone number is not valid"),
   });
 
   const {
@@ -80,7 +83,7 @@ export default function LoginPage({ setLoggedInUserId }) {
               <br />
               <input
                 {...register("userEmail")}
-                placeholder="Enter your email id"
+                placeholder="Enter your email id or phone number"
                 className={styles.input}
               />
               {errors.userEmail && (
